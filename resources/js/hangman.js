@@ -20,14 +20,16 @@ Hangman.prototype.getPuzzle = function () {
 
 // Make a guess //
 Hangman.prototype.makeGuess = function (guess) {
-    guess = guess.toLowerCase();
-    if (!this.guessedLetters.includes(guess)) {
-        this.guessedLetters.push(guess.toLowerCase());
-        if (!this.word.includes(guess)) {
-            this.guessesLeft--;
+    if (this.status === 'playing') {
+        guess = guess.toLowerCase();
+        if (!this.guessedLetters.includes(guess)) {
+            this.guessedLetters.push(guess.toLowerCase());
+            if (!this.word.includes(guess)) {
+                this.guessesLeft--;
+            };
         };
+        this.getStatus();
     };
-    this.getStatus();
 };
 
 // Get status //
@@ -39,13 +41,24 @@ Hangman.prototype.getStatus = function () {
     };
 };
 
+// Render status msg //
+Hangman.prototype.renderStatus = function () {
+    if (this.status === 'failed') {
+        guessesEl.textContent = `Nice try! The word was '${this.word.join('')}'.`
+    } else if ((this.status === 'playing')) {
+        guessesEl.textContent = `Remaining guesses: ${game1.guessesLeft}`;
+    } else {
+        guessesEl.textContent = `Congratulations! You guessed the word.`
+    };
+};
+
 // Render Game //
 Hangman.prototype.renderGame = function () {
     instructEl.textContent = 'Press a letter to make a guess and discover the word!';
     puzzleEl.textContent = this.getPuzzle();
-    guessesEl.textContent = `Remaining guesses: ${game1.guessesLeft}`;
+    guessesEl.textContent = this.renderStatus();
 
     containerEl.innerHTML = '';
     containerEl.append(instructEl, puzzleEl, guessesEl);
-    console.log(this.status);
+    this.renderStatus();
 };
