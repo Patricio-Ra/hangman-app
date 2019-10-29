@@ -12,7 +12,7 @@ const instructEl = document.createElement('p');
 // Events //
 window.addEventListener('keydown', e => {
     const guess = e.key;
-    if (guess.match(/^[a-zA-Z]$/i) && game1.status === 'playing') {
+    if (guess.match(/^[a-zA-Z]$/i)) {
         game1.makeGuess(guess);
         game1.renderGame();
     }; 
