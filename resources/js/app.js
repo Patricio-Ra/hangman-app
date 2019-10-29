@@ -1,7 +1,7 @@
 'use strict'
 
 // Instances //
-const game1 = new Hangman('helicopter', 4);
+const game1 = new Hangman('papa rico', 4);
 
 // Elements //
 const containerEl = document.getElementById('game');

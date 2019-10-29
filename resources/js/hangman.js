@@ -5,11 +5,11 @@ class Hangman {
     constructor (word, guessesLeft) {
         this.word = word.toLowerCase().split('');
         this.guessesLeft = guessesLeft;
-        this.guessedLetters = [' '];
+        this.guessedLetters = [];
         this.status = 'playing';
     };
 
-    getPuzzle () {
+    get puzzle () {
         let puzzle = '';
         this.word.forEach(letter => {
             this.guessedLetters.includes(letter) || letter === ' ' ? puzzle += letter : puzzle += '*';
@@ -26,19 +26,19 @@ class Hangman {
                     this.guessesLeft--;
                 };
             };
-            this.getStatus();
+            this.statusMessage;
         };
     };
 
-    getStatus = function () {
+    get statusMessage () {
         if (this.guessesLeft === 0) {
             this.status = 'failed';
-        } else if (!this.getPuzzle().includes('*')) {
+        } else if (!this.puzzle.includes('*')) {
             this.status = 'succeeded';
         };
     };
 
-    renderStatus = function () {
+    renderStatus () {
         if (this.status === 'failed') {
             guessesEl.textContent = `Nice try! The word was '${this.word.join('')}'.`
         } else if ((this.status === 'playing')) {
@@ -48,9 +48,9 @@ class Hangman {
         };
     };
 
-    renderGame = function () {
+    renderGame () {
         instructEl.textContent = 'Press a letter to make a guess and discover the word!';
-        puzzleEl.textContent = this.getPuzzle();
+        puzzleEl.textContent = this.puzzle;
         guessesEl.textContent = this.renderStatus();
     
         containerEl.innerHTML = '';
