@@ -42,7 +42,7 @@ class Hangman {
         if (this.status === 'failed') {
             guessesEl.textContent = `Nice try! The word was '${this.word.join('')}'.`
         } else if ((this.status === 'playing')) {
-            guessesEl.textContent = `Remaining guesses: ${game1.guessesLeft}`;
+            guessesEl.textContent = `Remaining guesses: ${this.guessesLeft}`;
         } else {
             guessesEl.textContent = `Congratulations! You guessed the word.`
         };

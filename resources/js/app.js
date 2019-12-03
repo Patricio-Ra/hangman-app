@@ -20,14 +20,23 @@ window.addEventListener('keydown', e => {
     }; 
 });
 
-// Setting up Http request.
-const xhr = new XMLHttpRequest();
+getPuzzle((error, puzzle) => {
+    error ? console.log(`Error: ${error}`) : console.log(puzzle);
+});
 
-xhr.addEventListener("readystatechange", e => {
+/*
+// Practicing with another API.
+const xhrCountry = new XMLHttpRequest();
+xhrCountry.addEventListener("readystatechange", e => {
     if (e.target.readyState === 4 && e.target.status === 200){
-        const data = JSON.parse(xhr.response);
-        console.log(data);
+        const data = JSON.parse(e.target.response);
+        const countryCode = "AR";
+        const country = data.find(country => country.alpha2Code === countryCode);
+        console.log(country.name);
+    } else if (e.target.readyState === 4){
+        console.log("An error has taken place.");
     }
 });
-xhr.open("GET", "http://puzzle.mead.io/puzzle");
-xhr.send();
+xhrCountry.open("GET", "http://restcountries.eu/rest/v2/all");
+xhrCountry.send();
+*/
