@@ -1,16 +1,32 @@
 'use strict'
 
-// Setting up Http request.
-const getPuzzle = (callback) => {
+// Puzzle word Http request.
+const getPuzzle = (wCount) => new Promise((resolve, reject) => {
     const xhrWords = new XMLHttpRequest();
     xhrWords.addEventListener("readystatechange", e => {
         if (e.target.readyState === 4 && e.target.status === 200){
             const data = JSON.parse(e.target.response);
-            callback(undefined, data.puzzle);
+            data ? resolve(data.puzzle) : reject("An error has taken place");
         } else if (e.target.readyState === 4) {
-            callback("An error has taken place", undefined);
+            reject("An error has taken place");
         }
     });
-    xhrWords.open("GET", "http://puzzle.mead.io/puzzle?wordCount=3");
+    xhrWords.open("GET", `http://puzzle.mead.io/puzzle?wordCount=${wCount}`);
     xhrWords.send();
+})
+
+// Country name Http request
+const getCountry = (countryCode, callback) => {
+    const xhrCountry = new XMLHttpRequest();
+    xhrCountry.addEventListener("readystatechange", e => {
+        if (e.target.readyState === 4 && e.target.status === 200){
+            const data = JSON.parse(e.target.response);
+            const country = data.find(country => country.alpha2Code === countryCode);
+            country ? callback(undefined, country.name) : callback("Could not fetch the data."); 
+        } else if (e.target.readyState === 4){
+            callback("Could not fetch the data.");      
+        }
+    });
+    xhrCountry.open("GET", "http://restcountries.eu/rest/v2/all");
+    xhrCountry.send();
 }

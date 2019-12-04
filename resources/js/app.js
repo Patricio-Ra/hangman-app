@@ -20,23 +20,6 @@ window.addEventListener('keydown', e => {
     }; 
 });
 
-getPuzzle((error, puzzle) => {
-    error ? console.log(`Error: ${error}`) : console.log(puzzle);
-});
+getPuzzle("2", (error, puzzle) => error ? console.log(`Error: ${error}`) : console.log(puzzle));
+getCountry("AR", (error, countryName) => error ? console.log(`${error}`) : console.log(`Country name: ${countryName}`));
 
-/*
-// Practicing with another API.
-const xhrCountry = new XMLHttpRequest();
-xhrCountry.addEventListener("readystatechange", e => {
-    if (e.target.readyState === 4 && e.target.status === 200){
-        const data = JSON.parse(e.target.response);
-        const countryCode = "AR";
-        const country = data.find(country => country.alpha2Code === countryCode);
-        console.log(country.name);
-    } else if (e.target.readyState === 4){
-        console.log("An error has taken place.");
-    }
-});
-xhrCountry.open("GET", "http://restcountries.eu/rest/v2/all");
-xhrCountry.send();
-*/
