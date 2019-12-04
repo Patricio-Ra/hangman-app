@@ -20,6 +20,15 @@ window.addEventListener('keydown', e => {
     }; 
 });
 
-getPuzzle("2", (error, puzzle) => error ? console.log(`Error: ${error}`) : console.log(puzzle));
-getCountry("AR", (error, countryName) => error ? console.log(`${error}`) : console.log(`Country name: ${countryName}`));
+getPuzzle('2').then(puzzle => {
+    console.log(puzzle);
+}, error => {
+    console.log(`Error: ${error}`);
+});
+
+getCountry('AR').then(countryName => {
+    console.log(`Country name: ${countryName}`);
+}, error => {
+    console.log(`Error: ${error}`);
+});
 
