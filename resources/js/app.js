@@ -26,9 +26,10 @@ getPuzzle('2').then(puzzle => {
     console.log(`${error}`);
 });
 
-getCountry('AR').then(countryName => {
-    console.log(`Country name: ${countryName}`);
-}, error => {
-    console.log(`Error: ${error}`);
+getLocation().then(location => {
+    return getCountry(location.country);
+}).then(country => {
+    console.log(country.name)
+}).catch(error => {
+    console.log(error);
 });
-

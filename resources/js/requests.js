@@ -14,17 +14,23 @@ const getPuzzle = wCount => {
 };
 
 // Country name Http request
-const getCountry = countryCode => new Promise((resolve, reject) => {
-    const xhrCountry = new XMLHttpRequest();
-    xhrCountry.addEventListener('readystatechange', e => {
-        if (e.target.readyState === 4 && e.target.status === 200){
-            const data = JSON.parse(e.target.response);
-            const country = data.find(country => country.alpha2Code === countryCode);
-            country ? resolve(country.name) : reject('Could not fetch the data.'); 
-        } else if (e.target.readyState === 4){
-            reject('Could not fetch the data.');      
+const getCountry = countryCode => {
+    return fetch('http://restcountries.eu/rest/v2/all', {}).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Unable to fetch the countries.');
         }
-    });
-    xhrCountry.open('GET', 'http://restcountries.eu/rest/v2/all');
-    xhrCountry.send();
-})
+    }).then(data => data.find(country => country.alpha2Code === countryCode));
+};
+
+// Location Http request
+const getLocation = () => {
+    return fetch('http://ipinfo.io/json?token=da5cbab48f8fa0', {}).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Unable to fetch the location.');
+        }
+    })
+}
