@@ -22,8 +22,8 @@ window.addEventListener('keydown', e => {
 
 getPuzzle('2').then(puzzle => {
     console.log(puzzle);
-}, error => {
-    console.log(`Error: ${error}`);
+}).catch(error => {
+    console.log(`${error}`);
 });
 
 getCountry('AR').then(countryName => {

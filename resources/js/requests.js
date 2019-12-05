@@ -1,19 +1,17 @@
 'use strict'
 
 // Puzzle word Http request.
-const getPuzzle = wCount => new Promise((resolve, reject) => {
-    const xhrWords = new XMLHttpRequest();
-    xhrWords.addEventListener('readystatechange', e => {
-        if (e.target.readyState === 4 && e.target.status === 200){
-            const data = JSON.parse(e.target.response);
-            data ? resolve(data.puzzle) : reject('An error has taken place');
-        } else if (e.target.readyState === 4) {
-            reject('An error has taken place');
-        }
+const getPuzzle = wCount => {
+    return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wCount}`, {}).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            throw new Error('Unable to fetch the puzzle.');
+        };
+    }).then(data => {
+        return data.puzzle;
     });
-    xhrWords.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wCount}`);
-    xhrWords.send();
-})
+};
 
 // Country name Http request
 const getCountry = countryCode => new Promise((resolve, reject) => {
