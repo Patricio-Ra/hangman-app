@@ -50,10 +50,16 @@ class Hangman {
 
     renderGame () {
         instructEl.textContent = 'Press a letter to make a guess and discover the word!';
-        puzzleEl.textContent = this.puzzle;
         guessesEl.textContent = this.renderStatus();
-    
+        puzzleEl.innerHTML = '';
         containerEl.innerHTML = '';
+        
+        for (const char of this.puzzle.split('')) {
+            const spanEl = document.createElement('span');
+            spanEl.innerText = char;
+            puzzleEl.append(spanEl);
+        }
+
         containerEl.append(instructEl, puzzleEl, guessesEl);
         this.renderStatus();
     };

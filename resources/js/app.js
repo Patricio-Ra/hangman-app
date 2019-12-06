@@ -5,8 +5,8 @@ let game;
 
 // Elements //
 const containerEl = document.getElementById('game');
-const puzzleEl = document.createElement('h1');
-const guessesEl = document.createElement('h4');
+const puzzleEl = document.getElementById('puzzle');
+const guessesEl = document.getElementById('guesses');
 const instructEl = document.createElement('p');
 
 // Start Game //
