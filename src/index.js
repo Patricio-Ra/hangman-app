@@ -1,7 +1,7 @@
 'use strict'
 
-import 'core-js';
-import 'regenerator-runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import Hangman from './hangman';
 import getPuzzle from './requests';
 
