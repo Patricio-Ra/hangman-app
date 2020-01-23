@@ -8,11 +8,9 @@ import getPuzzle from './requests';
 // Instances //
 let game;
 
-
 // Elements //
 const puzzleEl = document.getElementById('puzzle');
 const guessesEl = document.getElementById('guesses');
-
 
 // Functions //
 const renderGame = () => {
@@ -31,7 +29,6 @@ const startGame = async () => {
     game = new Hangman(puzzle, 5);
     renderGame()
 }
-
 
 // Events //
 window.addEventListener('keydown', e => {
