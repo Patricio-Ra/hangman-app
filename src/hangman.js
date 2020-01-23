@@ -40,27 +40,13 @@ class Hangman {
 
     renderStatus () {
         if (this.status === 'failed') {
-            guessesEl.textContent = `Nice try! The word was '${this.word.join('')}'.`
+            return `Nice try! The word was '${this.word.join('')}'.`
         } else if ((this.status === 'playing')) {
-            guessesEl.textContent = `Remaining guesses: ${this.guessesLeft}`;
+            return `Remaining guesses: ${this.guessesLeft}`;
         } else {
-            guessesEl.textContent = `Congratulations! You guessed the word.`
+            return `Congratulations! You guessed the word.`
         };
     };
-
-    renderGame () {
-        instructEl.textContent = 'Press a letter to make a guess and discover the word!';
-        guessesEl.textContent = this.renderStatus();
-        puzzleEl.innerHTML = '';
-        containerEl.innerHTML = '';
-        
-        for (const char of this.puzzle.split('')) {
-            const spanEl = document.createElement('span');
-            spanEl.innerText = char;
-            puzzleEl.append(spanEl);
-        }
-
-        containerEl.append(instructEl, puzzleEl, guessesEl);
-        this.renderStatus();
-    };
 };
+
+export { Hangman as default };
